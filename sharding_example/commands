@@ -1,0 +1,33 @@
+
+//starting individual servers
+1.DATA_DIR=example_DB_1 PORT=3000 node shard-example.js
+2.DATA_DIR=example_DB_2 PORT=3001 node shard-example.js
+
+//start proxy server to forward request to above servers
+3. node shard-proxy.js
+4. curl --header 'Content-Type: application/json' --data '{"data": "This is some data"}' localhost:8000/a
+5.curl -w "\n" localhost:8000/a
+
+
+output:
+
+>  node shard-proxy.js
+Listening in the Port 8000!!
+Forwarding to:  http://localhost:3001/a
+Forwarding to: http://localhost:3001/a
+Forwarding to:  http://localhost:3000/b
+Forwarding to: http://localhost:3000/b
+
+
+>DATA_DIR=example_DB_2 PORT=3001 node shard-example.js
+Listening in the Port 3001!!
+storing data at key a
+Retrieving data from key a
+
+
+ >DATA_DIR=example_DB_1 PORT=3000 node shard-example.js
+Listening in the Port 3000!!
+storing data at key b
+Retrieving data from key b
+
+
