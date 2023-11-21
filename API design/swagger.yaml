@@ -1,0 +1,46 @@
+swagger: "2.0"
+info: 
+  title: Stripe API
+  description: API specification of Stripe's payment API.
+  version: 1.0.0
+host: api.stripe.com
+basePath: /v1
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths: 
+  /v1/charges:
+    get:
+      summary: List all charges
+      tags: 
+        - charges
+      operationId: listCharges
+      parameters:
+        - name: offset
+          in: query
+          description: How many items to skip in the response
+          required: false
+          type: integer
+          format: int32
+        - name: limit
+          in: query
+          description: How many items to return at one request
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paginated array of charges
+          schema:
+            $ref: '#/definitions/charges'
+    post:
+      summary: Create a Charge
+      operationId: createCharge
+      responses:
+        "201":
+          description: Null response
+

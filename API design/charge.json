@@ -1,0 +1,7 @@
+{
+    "id": "87-6543-456789",
+    "customer_id": "345678fghjk",
+    "amount": 5000,
+    "currency": "usd",
+    "status": "pending"
+}
